@@ -47,6 +47,8 @@ def main():
     myFont = pygame.font.SysFont("arial",30)
     moneyLabel = myFont.render("Money: 100", 1, (255,255,255))
     spinLabel = myFont.render("Spin!", 1, (255,255,255))
+    betLabel = myFont.render("Bet: 1", 1, (255,255,255))
+    jackpotLabel = myFont.render("Jackpot: 500", 1, (255,255,255))
     
     #the spin button
     spinButton_x = 100
@@ -61,6 +63,9 @@ def main():
     #bet buttons
     num_bets = 3
     betButton = []
+    betButton_label = [myFont.render("1", 1, (255,255,255)),
+                       myFont.render("5", 1, (255,255,255)),
+                       myFont.render("10", 1, (255,255,255))]
     betButton_x = [100, 170, 240]
     betButton_y = [330, 330, 330]
     betButton_width = 50
@@ -117,16 +122,20 @@ def main():
         for i in range(num_reels):
             screen.blit(reel[i],(reel_x[i],reel_y[i]))
             
-        #draw bet buttons
+        #draw bet buttons and their labels
         for i in range(num_bets):
             screen.blit(betButton[i],(betButton_x[i],betButton_y[i]))
-            
+            screen.blit(betButton_label[i], (betButton_x[i]+10,betButton_y[i]+8))
         #draw spin button and label
         screen.blit(spinButton, (spinButton_x,spinButton_y))
         screen.blit(spinLabel, (spinButton_x+spinButton_width/2-20,spinButton_y))
         
-        #draw money label on screen
+        #draw money, bet, and jackpot labels on screen
         screen.blit(moneyLabel, (250,50))
+        screen.blit(betLabel, (100,50))
+        screen.blit(jackpotLabel, (450,50))
+        
+        #flip the image to the display
         pygame.display.flip()
     
 # run the main class        
