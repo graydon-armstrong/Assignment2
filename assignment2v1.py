@@ -32,6 +32,17 @@ def main():
     background = background.convert()
     background.fill((0, 0, 255))
     
+    #pull a picture
+    reelImages = [pygame.image.load("blank.jpg"),
+                  pygame.image.load("bar.jpg"),
+                  pygame.image.load("seven.jpg"),
+                  pygame.image.load("bell.jpg"),
+                  pygame.image.load("grape.jpg"),
+                  pygame.image.load("orange.jpg"),
+                  pygame.image.load("cherry.jpg"),]
+    for i in range (len(reelImages)):
+        reelImages[i].convert()
+    
     #Put a label on the screen
     myFont = pygame.font.SysFont("arial",30)
     moneyLabel = myFont.render("Money: 100", 1, (255,255,255))
@@ -78,8 +89,8 @@ def main():
             elif event.type == pygame.MOUSEBUTTONUP:
                 if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     for i in range(num_reels):
-                        rand = random.randint(0,4)
-                        reel[i].fill(reel_type[rand])
+                        rand = random.randint(0,6)
+                        reel[i] = reelImages[rand]
                     #spinReels() - This is where the spin the reels will happen onClick
                     spinButton_clicked = True
                 spinButton.fill((50,50,50))               
