@@ -98,17 +98,31 @@ def main():
     
         #E - Event handling
         for event in pygame.event.get():
+            #quit event
             if event.type == pygame.QUIT:
                 keepGoing = False
+                
+            #mouseup events
             elif event.type == pygame.MOUSEBUTTONUP:
+                #mouse event for the spin button
                 if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     for i in range(num_reels):
                         rand = random.randint(0,6)
                         reel[i] = reelImages[rand]
-                    #spinReels() - This is where the spin the reels will happen onClick
                     spinButton_clicked = True
-                spinButton.fill((50,50,50))               
+                spinButton.fill((50,50,50))
+                
+                #mouse event for the change bet buttons
+                if (mouseWithin(betButton_x[0], betButton_y[0], betButton_width, betButton_height)):
+                    betLabel = myFont.render("Bet: 1", 1, (255,255,255))
+                elif (mouseWithin(betButton_x[1], betButton_y[1], betButton_width, betButton_height)):
+                    betLabel = myFont.render("Bet: 5", 1, (255,255,255))
+                elif (mouseWithin(betButton_x[2], betButton_y[2], betButton_width, betButton_height)):
+                    betLabel = myFont.render("Bet: 10", 1, (255,255,255))  
+            
+            #mousedown events                 
             elif event.type == pygame.MOUSEBUTTONDOWN:
+                #mouse event for the spin button
                 if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     spinButton.fill((200,200,200))
                     spinButton_clicked = False                    
