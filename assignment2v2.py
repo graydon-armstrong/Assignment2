@@ -46,11 +46,12 @@ def main():
     #Put a label on the screen
     myFont = pygame.font.SysFont("arial",30)
     moneyLabel = myFont.render("Money: 100", 1, (255,255,255))
+    spinLabel = myFont.render("Spin!", 1, (255,255,255))
     
     #the spin button
     spinButton_x = 100
-    spinButton_y = 220
-    spinButton_width = 340
+    spinButton_y = 270
+    spinButton_width = 490
     spinButton_height = 40
     spinButton_clicked = False
     spinButton = pygame.Surface((spinButton_width,spinButton_height))
@@ -60,10 +61,10 @@ def main():
     #the reels
     num_reels = 3
     reel = []
-    reel_x = [100,220,340]
+    reel_x = [100,270,440]
     reel_y = [100,100,100]
     for i in range(num_reels):
-        reel.append(pygame.Surface((100,100)))
+        reel.append(reelImages[0])
         reel[i] = reel[i].convert()
     
     #A - Action (broken into ALTER steps)
@@ -101,6 +102,7 @@ def main():
         for i in range(num_reels):
             screen.blit(reel[i],(reel_x[i],reel_y[i]))
         screen.blit(spinButton, (spinButton_x,spinButton_y))
+        screen.blit(spinLabel, (spinButton_x+spinButton_width/2-20,spinButton_y))
         screen.blit(moneyLabel, (250,50))
         pygame.display.flip()
 
