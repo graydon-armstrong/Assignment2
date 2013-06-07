@@ -20,7 +20,8 @@ def mouseWithin(obj_x, obj_y, obj_width, obj_height):
         return True
     else:
         return False
-    
+
+#calculate the money won from the spin and whether the jacpot was won
 def calculateSpin(reelValue, reelMultipliers, bet):
     moneyWon = bet*reelMultipliers[reelValue[0]]*reelMultipliers[reelValue[1]]*reelMultipliers[reelValue[2]]
     moneyWon = int(moneyWon)
@@ -31,6 +32,25 @@ def calculateSpin(reelValue, reelMultipliers, bet):
         jackpot = False
         
     return moneyWon, jackpot 
+
+#calculate a reel value with some harder to get than others
+def getReelValue():
+    randNum = random.randint(0,49)
+    if randNum < 20:
+        value = 0
+    elif randNum <30:
+        value = 1
+    elif randNum < 37:
+        value = 2
+    elif randNum < 42:
+        value = 3
+    elif randNum < 46:
+        value = 4
+    elif randNum < 48:
+        value = 5
+    elif randNum < 50:
+        value = 6
+    return value
         
 def main():
     #D - Display configuration
@@ -148,9 +168,8 @@ def main():
                 #mouse event for the spin button
                 if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     for i in range(num_reels):
-                        rand = random.randint(0,6)
-                        reelValue[i] = rand
-                        reelSprite[i] = reelImages[rand]
+                        reelValue[i] = getReelValue()
+                        reelSprite[i] = reelImages[reelValue[i]]
                     spinButton_clicked = True
                     moneyWon, isJackpot = calculateSpin(reelValue, reelMultipliers, bet)
                     if (isJackpot == True):
