@@ -29,8 +29,8 @@ def calculateSpin(reelValue, reelMultipliers, bet):
     
     #if all the reels are the same image its a jackpot
     if (reelValue[0] == reelValue[1] and reelValue[0] == reelValue[2]):
-        #make sure it isnt three blanks
-        if reelValue[0] != 0:
+        #you have to get three cherrys bells or sevens to win the jackpot
+        if reelValue[0] == 4 or reelValue[0] == 5 or reelValue[0] == 6:
             jackpot = True
     else:
         jackpot = False
@@ -76,11 +76,11 @@ def main():
     #load the reel images
     reelImages = [pygame.image.load("blank.jpg"),
                   pygame.image.load("bar.jpg"),
-                  pygame.image.load("seven.jpg"),
-                  pygame.image.load("bell.jpg"),
                   pygame.image.load("grape.jpg"),
                   pygame.image.load("orange.jpg"),
-                  pygame.image.load("cherry.jpg"),]
+                  pygame.image.load("cherry.jpg"),
+                  pygame.image.load("bell.jpg"),
+                  pygame.image.load("seven.jpg"),]
     for i in range (len(reelImages)):
         reelImages[i].convert()
         
