@@ -58,6 +58,18 @@ def main():
     spinButton = spinButton.convert()
     spinButton.fill((50,50,50))
     
+    #bet buttons
+    num_bets = 3
+    betButton = []
+    betButton_x = [100, 170, 240]
+    betButton_y = [330, 330, 330]
+    betButton_width = 50
+    betButton_height = 50
+    for i in range(num_bets):
+        betButton.append(pygame.Surface((betButton_width,betButton_height)))
+        betButton[i] = betButton[i].convert
+        betButton[i].fill((50,50,50))
+    
     #the reels
     num_reels = 3
     reel = []
@@ -101,6 +113,8 @@ def main():
         screen.blit(background, (0, 0))
         for i in range(num_reels):
             screen.blit(reel[i],(reel_x[i],reel_y[i]))
+        for i in range(num_bets):
+            screen.blit(betButton[i],(betButton_x[i],betButton_y[i]))
         screen.blit(spinButton, (spinButton_x,spinButton_y))
         screen.blit(spinLabel, (spinButton_x+spinButton_width/2-20,spinButton_y))
         screen.blit(moneyLabel, (250,50))
