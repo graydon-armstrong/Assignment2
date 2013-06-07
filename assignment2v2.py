@@ -106,20 +106,28 @@ def main():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     spinButton.fill((200,200,200))
-                    spinButton_clicked = False
-                    
+                    spinButton_clicked = False                    
     
         #R - Refresh display
+        
+        #draw background
         screen.blit(background, (0, 0))
+        
+        #draw reels
         for i in range(num_reels):
             screen.blit(reel[i],(reel_x[i],reel_y[i]))
+            
+        #draw bet buttons
         for i in range(num_bets):
             screen.blit(betButton[i],(betButton_x[i],betButton_y[i]))
+            
+        #draw spin button and label
         screen.blit(spinButton, (spinButton_x,spinButton_y))
         screen.blit(spinLabel, (spinButton_x+spinButton_width/2-20,spinButton_y))
+        
+        #draw money label on screen
         screen.blit(moneyLabel, (250,50))
         pygame.display.flip()
-
     
 # run the main class        
 if __name__ == "__main__": main()
