@@ -85,7 +85,7 @@ def main():
         reelImages[i].convert()
         
     #set the reel multipliers
-    reelMultipliers = [0,1.2,1.4,1.8,2.6,4.2,7.4]
+    reelMultipliers = [0,1.1,1.2,1.4,1.8,2.6,4.2]
     
     #Create labels for different variables to show the user
     myFont = pygame.font.SysFont("arial",30)
