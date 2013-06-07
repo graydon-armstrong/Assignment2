@@ -28,10 +28,15 @@ def main():
     x_pos = 200
     y_pos = 200
     
-    #E - Entities (just background for now)
+    #E - Entities
     background = pygame.Surface(screen.get_size())
     background = background.convert()
     background.fill((0, 0, 255))
+    
+    #Game Variables
+    money = 100
+    bet = 1
+    jackpot = 500
     
     #load the reel images
     reelImages = [pygame.image.load("blank.jpg"),
@@ -46,9 +51,9 @@ def main():
     
     #Create labels for different variables to show the user
     myFont = pygame.font.SysFont("arial",30)
-    moneyLabel = myFont.render("Money: 100", 1, (255,255,255))
-    betLabel = myFont.render("Bet: 1", 1, (255,255,255))
-    jackpotLabel = myFont.render("Jackpot: 500", 1, (255,255,255))
+    moneyLabel = myFont.render("Money: " + str(money), 1, (255,255,255))
+    betLabel = myFont.render("Bet: " + str(bet), 1, (255,255,255))
+    jackpotLabel = myFont.render("Jackpot: " + str(jackpot), 1, (255,255,255))
     
     #the spin button
     spinButton_x = 100
@@ -135,11 +140,12 @@ def main():
                 
                 #mouse event for the change bet buttons
                 if (mouseWithin(betButton_x[0], betButton_y[0], betButton_width, betButton_height)):
-                    betLabel = myFont.render("Bet: 1", 1, (255,255,255))
+                    bet = 1
                 elif (mouseWithin(betButton_x[1], betButton_y[1], betButton_width, betButton_height)):
-                    betLabel = myFont.render("Bet: 5", 1, (255,255,255))
+                    bet = 5
                 elif (mouseWithin(betButton_x[2], betButton_y[2], betButton_width, betButton_height)):
-                    betLabel = myFont.render("Bet: 10", 1, (255,255,255))
+                    bet = 10
+                betLabel = myFont.render("Bet: " + str(bet), 1, (255,255,255))
                     
                 #mouse event for quit button
                 if (mouseWithin(quitButton_x, quitButton_y, quitButton_width, quitButton_height)):
