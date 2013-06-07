@@ -39,20 +39,20 @@ def calculateSpin(reelValue, reelMultipliers, bet):
 
 #calculate a reel value with some harder to get than others
 def getReelValue():
-    randNum = random.randint(0,49)
-    if randNum < 20:
+    randNum = random.randint(0,99)
+    if randNum < 40:
         value = 0
-    elif randNum <30:
+    elif randNum <60:
         value = 1
-    elif randNum < 37:
+    elif randNum < 75:
         value = 2
-    elif randNum < 42:
+    elif randNum < 85:
         value = 3
-    elif randNum < 46:
+    elif randNum < 92:
         value = 4
-    elif randNum < 48:
+    elif randNum < 97:
         value = 5
-    elif randNum < 50:
+    elif randNum < 100:
         value = 6
     return value
         
