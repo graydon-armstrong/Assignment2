@@ -23,20 +23,25 @@ def main():
     background.fill((0, 0, 255))
     
     #the spin button
-    spinButton = pygame.Surface((340,40))
+    spinButton_x = 100
+    spinButton_y = 220
+    spinButton_width = 340
+    spinButton_height = 40
+    spinButton_clicked = False
+    spinButton = pygame.Surface((spinButton_width,spinButton_height))
     spinButton = spinButton.convert()
     spinButton.fill((50,50,50))
     
-    #the reels
-    reels = 3
-    box = []
-    box_x = [100,220,340]
-    box_y = [100,100,100]
+    #the num_reels
+    num_reels = 3
+    reel = []
+    reel_x = [100,220,340]
+    reel_y = [100,100,100]
 
-    for i in range(reels):
-        box.append(pygame.Surface((100,100)))
-        box[i] = box[i].convert()
-        box[i].fill((50,50,50))
+    for i in range(num_reels):
+        reel.append(pygame.Surface((100,100)))
+        reel[i] = reel[i].convert()
+        reel[i].fill((50,50,50))
     
     #A - Action (broken into ALTER steps)
     
@@ -59,12 +64,24 @@ def main():
                 coordinates = list(pygame.mouse.get_pos())
                 x_pos = coordinates[0]
                 y_pos = coordinates[1]
+                
+                if (x_pos >= spinButton_x and x_pos <= spinButton_x+spinButton_width and 
+                    y_pos >= spinButton_y and y_pos <= spinButton_y+spinButton_height):
+                    if spinButton_clicked:
+                        spinButton.fill((50,50,50))
+                        spinButton_clicked = False
+                    else:
+                        spinButton.fill((200,200,200))
+                        #spinReels()
+                        spinButton_clicked = True
+                
+                    
     
         #R - Refresh display
         screen.blit(background, (0, 0))
-        for i in range(reels):
-            screen.blit(box[i],(box_x[i],box_y[i]))
-        screen.blit(spinButton, (100,220))
+        for i in range(num_reels):
+            screen.blit(reel[i],(reel_x[i],reel_y[i]))
+        screen.blit(spinButton, (spinButton_x,spinButton_y))
         pygame.display.flip()
 
     
