@@ -20,6 +20,10 @@ def mouseWithin(obj_x, obj_y, obj_width, obj_height):
         return True
     else:
         return False
+    
+def calculateSpin(reelValue, reelMultipliers, bet, jackpot):
+    moneyWon = bet*reelMultipliers[reelValue[0]]*reelMultipliers[reelValue[1]]*reelMultipliers[reelValue[2]]
+    print moneyWon 
         
 def main():
     #D - Display configuration
@@ -48,6 +52,9 @@ def main():
                   pygame.image.load("cherry.jpg"),]
     for i in range (len(reelImages)):
         reelImages[i].convert()
+        
+    #set the reel multipliers
+    reelMultipliers = [0,1.1,1.2,1.3,1.4,1.5,1.6]
     
     #Create labels for different variables to show the user
     myFont = pygame.font.SysFont("arial",30)
@@ -103,12 +110,13 @@ def main():
     
     #the reels
     num_reels = 3
-    reel = []
+    reelSprite = []
+    reelValue = [0,0,0]
     reel_x = [100,270,440]
     reel_y = [100,100,100]
     for i in range(num_reels):
-        reel.append(reelImages[0])
-        reel[i] = reel[i].convert()
+        reelSprite.append(reelImages[0])
+        reelSprite[i] = reelSprite[i].convert()
     
     #A - Action (broken into ALTER steps)
     
@@ -134,8 +142,10 @@ def main():
                 if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     for i in range(num_reels):
                         rand = random.randint(0,6)
-                        reel[i] = reelImages[rand]
+                        reelValue[i] = rand
+                        reelSprite[i] = reelImages[rand]
                     spinButton_clicked = True
+                    calculateSpin(reelValue, reelMultipliers, bet, jackpot)
                 spinButton.fill((50,50,50))
                 
                 #mouse event for the change bet buttons
@@ -146,6 +156,21 @@ def main():
                 elif (mouseWithin(betButton_x[2], betButton_y[2], betButton_width, betButton_height)):
                     bet = 10
                 betLabel = myFont.render("Bet: " + str(bet), 1, (255,255,255))
+                
+                #mouse event for reset button
+                if (mouseWithin(resetButton_x, resetButton_y, resetButton_width, resetButton_height)):
+                    #reset all variables to defaults
+                    bet = 1
+                    money = 100
+                    jackpot = 500
+                    #change the reels back to blanks
+                    for i in range(num_reels):
+                        reelSprite[i] = reelImages[0]
+                        reelValue[i] = 0
+                    #update the lables with the default variables
+                    moneyLabel = myFont.render("Money: " + str(money), 1, (255,255,255))
+                    betLabel = myFont.render("Bet: " + str(bet), 1, (255,255,255))
+                    jackpotLabel = myFont.render("Jackpot: " + str(jackpot), 1, (255,255,255))
                     
                 #mouse event for quit button
                 if (mouseWithin(quitButton_x, quitButton_y, quitButton_width, quitButton_height)):
@@ -165,7 +190,7 @@ def main():
         
         #draw reels
         for i in range(num_reels):
-            screen.blit(reel[i],(reel_x[i],reel_y[i]))
+            screen.blit(reelSprite[i],(reel_x[i],reel_y[i]))
             
         #draw bet buttons and their labels
         for i in range(num_bets):
