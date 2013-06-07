@@ -22,6 +22,10 @@ def main():
     background = background.convert()
     background.fill((0, 0, 255))
     
+    #Put a label on the screen
+    myFont = pygame.font.SysFont("arial",30)
+    moneyLabel = myFont.render("Money: 100", 1, (255,255,255))
+    
     #the reel options
     reel_type = [(50,50,50),(100,100,100),(150,150,150),(200,200,200),(250,250,250)]
     
@@ -40,7 +44,6 @@ def main():
     reel = []
     reel_x = [100,220,340]
     reel_y = [100,100,100]
-
     for i in range(num_reels):
         reel.append(pygame.Surface((100,100)))
         reel[i] = reel[i].convert()
@@ -91,6 +94,7 @@ def main():
         for i in range(num_reels):
             screen.blit(reel[i],(reel_x[i],reel_y[i]))
         screen.blit(spinButton, (spinButton_x,spinButton_y))
+        screen.blit(moneyLabel, (250,50))
         pygame.display.flip()
 
     
