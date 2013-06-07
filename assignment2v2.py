@@ -4,7 +4,7 @@
 # Last Modified By: Graydon Armstrong
 # Date Last Modified: June 5th, 2013
 # Program description: A slot machine game where the player can bet money and win
-# Revision History: Version 1 is drawing a temporary GUI for the slot machine to try out pygame
+# Revision History: Version 2 is putting together a end version GUI
 
 #I - Import and initialize
 import pygame, random
