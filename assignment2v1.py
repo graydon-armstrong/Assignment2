@@ -13,7 +13,7 @@ pygame.init()
 def main():
     #D - Display configuration
     screen = pygame.display.set_mode((640, 480))
-    pygame.display.set_caption("Hello, world!")
+    pygame.display.set_caption("Slots!")
     x_pos = 200
     y_pos = 200
     
@@ -22,11 +22,18 @@ def main():
     background = background.convert()
     background.fill((0, 0, 255))
     
+    #the spin button
+    spinButton = pygame.Surface((340,40))
+    spinButton = spinButton.convert()
+    spinButton.fill((50,50,50))
+    
+    #the reels
+    reels = 3
     box = []
     box_x = [100,220,340]
     box_y = [100,100,100]
 
-    for i in range(3):
+    for i in range(reels):
         box.append(pygame.Surface((100,100)))
         box[i] = box[i].convert()
         box[i].fill((50,50,50))
@@ -55,8 +62,9 @@ def main():
     
         #R - Refresh display
         screen.blit(background, (0, 0))
-        for i in range(3):
+        for i in range(reels):
             screen.blit(box[i],(box_x[i],box_y[i]))
+        screen.blit(spinButton, (100,220))
         pygame.display.flip()
 
     
