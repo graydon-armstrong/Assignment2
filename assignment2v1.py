@@ -7,7 +7,7 @@
 # Revision History: Version 1 is drawing a temporary GUI for the slot machine to try out pygame
 
 #I - Import and initialize
-import pygame
+import pygame, random
 pygame.init()
 
 def main():
@@ -22,6 +22,9 @@ def main():
     background = background.convert()
     background.fill((0, 0, 255))
     
+    #the reel options
+    reel_type = [(50,50,50),(100,100,100),(150,150,150),(200,200,200),(250,250,250)]
+    
     #the spin button
     spinButton_x = 100
     spinButton_y = 220
@@ -32,7 +35,7 @@ def main():
     spinButton = spinButton.convert()
     spinButton.fill((50,50,50))
     
-    #the num_reels
+    #the reels
     num_reels = 3
     reel = []
     reel_x = [100,220,340]
@@ -41,7 +44,7 @@ def main():
     for i in range(num_reels):
         reel.append(pygame.Surface((100,100)))
         reel[i] = reel[i].convert()
-        reel[i].fill((50,50,50))
+        reel[i].fill(reel_type[0])
     
     #A - Action (broken into ALTER steps)
     
@@ -59,7 +62,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 keepGoing = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONUP:
                 print pygame.mouse.get_pos()
                 coordinates = list(pygame.mouse.get_pos())
                 x_pos = coordinates[0]
@@ -67,14 +70,15 @@ def main():
                 
                 if (x_pos >= spinButton_x and x_pos <= spinButton_x+spinButton_width and 
                     y_pos >= spinButton_y and y_pos <= spinButton_y+spinButton_height):
-                    if spinButton_clicked:
-                        spinButton.fill((50,50,50))
-                        spinButton_clicked = False
-                    else:
-                        spinButton.fill((200,200,200))
-                        #spinReels() - This is where the spin the reels will happen onClick
-                        spinButton_clicked = True
-                
+                    spinButton.fill((50,50,50))
+                    for i in range(num_reels):
+                        rand = random.randint(0,4)
+                        reel[i].fill(reel_type[rand])
+                    #spinReels() - This is where the spin the reels will happen onClick
+                    spinButton_clicked = True
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                spinButton.fill((200,200,200))
+                spinButton_clicked = False
                     
     
         #R - Refresh display
