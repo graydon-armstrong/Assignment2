@@ -10,7 +10,10 @@
 import pygame, random
 pygame.init()
 
-def mouseWithin(mouse_x, mouse_y, obj_x, obj_y, obj_width, obj_height):
+def mouseWithin(obj_x, obj_y, obj_width, obj_height):
+    coordinates = list(pygame.mouse.get_pos())
+    mouse_x = coordinates[0]
+    mouse_y = coordinates[1]
     if (mouse_x >= obj_x and mouse_x <= obj_x+obj_width and 
         mouse_y >= obj_y and mouse_y <= obj_y+obj_height):
         return True
@@ -73,11 +76,7 @@ def main():
             if event.type == pygame.QUIT:
                 keepGoing = False
             elif event.type == pygame.MOUSEBUTTONUP:
-                coordinates = list(pygame.mouse.get_pos())
-                x_pos = coordinates[0]
-                y_pos = coordinates[1]
-                
-                if (mouseWithin(x_pos, y_pos, spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
+                if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     for i in range(num_reels):
                         rand = random.randint(0,4)
                         reel[i].fill(reel_type[rand])
@@ -85,11 +84,7 @@ def main():
                     spinButton_clicked = True
                 spinButton.fill((50,50,50))               
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                coordinates = list(pygame.mouse.get_pos())
-                x_pos = coordinates[0]
-                y_pos = coordinates[1]
-                
-                if (mouseWithin(x_pos, y_pos, spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
+                if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     spinButton.fill((200,200,200))
                     spinButton_clicked = False
                     
