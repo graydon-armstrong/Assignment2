@@ -67,7 +67,7 @@ def main():
     betButton_height = 50
     for i in range(num_bets):
         betButton.append(pygame.Surface((betButton_width,betButton_height)))
-        betButton[i] = betButton[i].convert
+        betButton[i] = betButton[i].convert()
         betButton[i].fill((50,50,50))
     
     #the reels
