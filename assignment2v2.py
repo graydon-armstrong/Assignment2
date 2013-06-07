@@ -10,6 +10,7 @@
 import pygame, random
 pygame.init()
 
+#method to find out if the mouse is within the area of an object
 def mouseWithin(obj_x, obj_y, obj_width, obj_height):
     coordinates = list(pygame.mouse.get_pos())
     mouse_x = coordinates[0]
@@ -32,7 +33,7 @@ def main():
     background = background.convert()
     background.fill((0, 0, 255))
     
-    #pull a picture
+    #load the reel images
     reelImages = [pygame.image.load("blank.jpg"),
                   pygame.image.load("bar.jpg"),
                   pygame.image.load("seven.jpg"),
@@ -43,10 +44,9 @@ def main():
     for i in range (len(reelImages)):
         reelImages[i].convert()
     
-    #Put a label on the screen
+    #Create labels for different variables to show the user
     myFont = pygame.font.SysFont("arial",30)
     moneyLabel = myFont.render("Money: 100", 1, (255,255,255))
-    spinLabel = myFont.render("Spin!", 1, (255,255,255))
     betLabel = myFont.render("Bet: 1", 1, (255,255,255))
     jackpotLabel = myFont.render("Jackpot: 500", 1, (255,255,255))
     
@@ -59,6 +59,27 @@ def main():
     spinButton = pygame.Surface((spinButton_width,spinButton_height))
     spinButton = spinButton.convert()
     spinButton.fill((50,50,50))
+    spinLabel = myFont.render("Spin!", 1, (255,255,255))
+    
+    #reset button
+    resetButton_x = 310
+    resetButton_y = 330
+    resetButton_width = 130
+    resetButton_height = 50
+    resetButton = pygame.Surface((resetButton_width,resetButton_height))
+    resetButton = resetButton.convert()
+    resetButton.fill((50,50,50))
+    resetLabel = myFont.render("Reset", 1, (255,255,255))
+    
+    #quit button
+    quitButton_x = 460
+    quitButton_y = 330
+    quitButton_width = 130
+    quitButton_height = 50
+    quitButton = pygame.Surface((quitButton_width,quitButton_height))
+    quitButton = quitButton.convert()
+    quitButton.fill((50,50,50))
+    quitLabel = myFont.render("Quit", 1, (255,255,255))
     
     #bet buttons
     num_bets = 3
@@ -86,11 +107,11 @@ def main():
     
     #A - Action (broken into ALTER steps)
     
-        #A - Assign values to key variables
+    #A - Assign values to key variables
     clock = pygame.time.Clock()
     keepGoing = True
     
-        #L - Set up main loop
+    #L - Set up main loop
     while keepGoing:
     
         #T - Timer to set frame rate
@@ -140,9 +161,18 @@ def main():
         for i in range(num_bets):
             screen.blit(betButton[i],(betButton_x[i],betButton_y[i]))
             screen.blit(betButton_label[i], (betButton_x[i]+10,betButton_y[i]+8))
+        
         #draw spin button and label
         screen.blit(spinButton, (spinButton_x,spinButton_y))
         screen.blit(spinLabel, (spinButton_x+spinButton_width/2-20,spinButton_y))
+        
+        #draw reset button and label
+        screen.blit(resetButton, (resetButton_x,resetButton_y))
+        screen.blit(resetLabel, (resetButton_x+resetButton_width/2-30,resetButton_y+8))
+        
+        #draw quit button and label
+        screen.blit(quitButton, (quitButton_x,quitButton_y))
+        screen.blit(quitLabel, (quitButton_x+quitButton_width/2-20,quitButton_y+8))
         
         #draw money, bet, and jackpot labels on screen
         screen.blit(moneyLabel, (250,50))
