@@ -63,22 +63,27 @@ def main():
             if event.type == pygame.QUIT:
                 keepGoing = False
             elif event.type == pygame.MOUSEBUTTONUP:
-                print pygame.mouse.get_pos()
                 coordinates = list(pygame.mouse.get_pos())
                 x_pos = coordinates[0]
                 y_pos = coordinates[1]
                 
                 if (x_pos >= spinButton_x and x_pos <= spinButton_x+spinButton_width and 
                     y_pos >= spinButton_y and y_pos <= spinButton_y+spinButton_height):
-                    spinButton.fill((50,50,50))
                     for i in range(num_reels):
                         rand = random.randint(0,4)
                         reel[i].fill(reel_type[rand])
                     #spinReels() - This is where the spin the reels will happen onClick
                     spinButton_clicked = True
+                spinButton.fill((50,50,50))               
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                spinButton.fill((200,200,200))
-                spinButton_clicked = False
+                coordinates = list(pygame.mouse.get_pos())
+                x_pos = coordinates[0]
+                y_pos = coordinates[1]
+                
+                if (x_pos >= spinButton_x and x_pos <= spinButton_x+spinButton_width and 
+                    y_pos >= spinButton_y and y_pos <= spinButton_y+spinButton_height):
+                    spinButton.fill((200,200,200))
+                    spinButton_clicked = False
                     
     
         #R - Refresh display
