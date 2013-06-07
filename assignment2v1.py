@@ -72,7 +72,7 @@ def main():
                         spinButton_clicked = False
                     else:
                         spinButton.fill((200,200,200))
-                        #spinReels()
+                        #spinReels() - This is where the spin the reels will happen onClick
                         spinButton_clicked = True
                 
                     
