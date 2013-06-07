@@ -21,9 +21,16 @@ def mouseWithin(obj_x, obj_y, obj_width, obj_height):
     else:
         return False
     
-def calculateSpin(reelValue, reelMultipliers, bet, jackpot):
+def calculateSpin(reelValue, reelMultipliers, bet):
     moneyWon = bet*reelMultipliers[reelValue[0]]*reelMultipliers[reelValue[1]]*reelMultipliers[reelValue[2]]
-    print moneyWon 
+    moneyWon = int(moneyWon)
+    
+    if (reelValue[0] == reelValue[1] and reelValue[0] == reelValue[2]):
+        jackpot = True
+    else:
+        jackpot = False
+        
+    return moneyWon, jackpot 
         
 def main():
     #D - Display configuration
@@ -54,7 +61,7 @@ def main():
         reelImages[i].convert()
         
     #set the reel multipliers
-    reelMultipliers = [0,1.1,1.2,1.3,1.4,1.5,1.6]
+    reelMultipliers = [0,1.2,1.4,1.8,2.6,4.2,7.4]
     
     #Create labels for different variables to show the user
     myFont = pygame.font.SysFont("arial",30)
@@ -145,7 +152,18 @@ def main():
                         reelValue[i] = rand
                         reelSprite[i] = reelImages[rand]
                     spinButton_clicked = True
-                    calculateSpin(reelValue, reelMultipliers, bet, jackpot)
+                    moneyWon, isJackpot = calculateSpin(reelValue, reelMultipliers, bet)
+                    if (isJackpot == True):
+                        money += moneyWon + jackpot
+                        jackpot = 500
+                    else:
+                        if (moneyWon > 0):
+                            money += moneyWon
+                        else:
+                            money -= bet
+                            jackpot += bet
+                    moneyLabel = myFont.render("Money: " + str(money), 1, (255,255,255))
+                    jackpotLabel = myFont.render("Jackpot: " + str(jackpot), 1, (255,255,255))  
                 spinButton.fill((50,50,50))
                 
                 #mouse event for the change bet buttons
