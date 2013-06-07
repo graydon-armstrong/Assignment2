@@ -22,9 +22,14 @@ def main():
     background = background.convert()
     background.fill((0, 0, 255))
     
-    box = pygame.Surface((100,100))
-    box = box.convert()
-    box.fill((50,50,50))
+    box = []
+    box_x = [100,220,340]
+    box_y = [100,100,100]
+
+    for i in range(3):
+        box.append(pygame.Surface((100,100)))
+        box[i] = box[i].convert()
+        box[i].fill((50,50,50))
     
     #A - Action (broken into ALTER steps)
     
@@ -50,7 +55,8 @@ def main():
     
         #R - Refresh display
         screen.blit(background, (0, 0))
-        screen.blit(box,(x_pos,y_pos))
+        for i in range(3):
+            screen.blit(box[i],(box_x[i],box_y[i]))
         pygame.display.flip()
 
     
