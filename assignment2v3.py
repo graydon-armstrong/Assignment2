@@ -25,9 +25,13 @@ def mouseWithin(obj_x, obj_y, obj_width, obj_height):
 def calculateSpin(reelValue, reelMultipliers, bet):
     moneyWon = bet*reelMultipliers[reelValue[0]]*reelMultipliers[reelValue[1]]*reelMultipliers[reelValue[2]]
     moneyWon = int(moneyWon)
+    jackpot = False
     
+    #if all the reels are the same image its a jackpot
     if (reelValue[0] == reelValue[1] and reelValue[0] == reelValue[2]):
-        jackpot = True
+        #make sure it isnt three blanks
+        if reelValue[0] != 0:
+            jackpot = True
     else:
         jackpot = False
         
