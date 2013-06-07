@@ -139,8 +139,12 @@ def main():
                 elif (mouseWithin(betButton_x[1], betButton_y[1], betButton_width, betButton_height)):
                     betLabel = myFont.render("Bet: 5", 1, (255,255,255))
                 elif (mouseWithin(betButton_x[2], betButton_y[2], betButton_width, betButton_height)):
-                    betLabel = myFont.render("Bet: 10", 1, (255,255,255))  
-            
+                    betLabel = myFont.render("Bet: 10", 1, (255,255,255))
+                    
+                #mouse event for quit button
+                if (mouseWithin(quitButton_x, quitButton_y, quitButton_width, quitButton_height)):
+                    keepGoing = False
+                    
             #mousedown events                 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 #mouse event for the spin button
