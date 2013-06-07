@@ -170,23 +170,26 @@ def main():
             #mouseup events
             elif event.type == pygame.MOUSEBUTTONUP:
                 #mouse event for the spin button
-                if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
-                    for i in range(num_reels):
-                        reelValue[i] = getReelValue()
-                        reelSprite[i] = reelImages[reelValue[i]]
-                    spinButton_clicked = True
-                    moneyWon, isJackpot = calculateSpin(reelValue, reelMultipliers, bet)
-                    if (isJackpot == True):
-                        money += moneyWon + jackpot
-                        jackpot = 500
-                    else:
-                        if (moneyWon > 0):
-                            money += moneyWon
+                if(money>= bet):
+                    if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
+                        for i in range(num_reels):
+                            reelValue[i] = getReelValue()
+                            reelSprite[i] = reelImages[reelValue[i]]
+                        spinButton_clicked = True
+                        moneyWon, isJackpot = calculateSpin(reelValue, reelMultipliers, bet)
+                        if (isJackpot == True):
+                            money += moneyWon + jackpot
+                            jackpot = 500
                         else:
-                            money -= bet
-                            jackpot += bet
-                    moneyLabel = myFont.render("Money: " + str(money), 1, (255,255,255))
-                    jackpotLabel = myFont.render("Jackpot: " + str(jackpot), 1, (255,255,255))  
+                            if (moneyWon > 0):
+                                money += moneyWon
+                            else:
+                                money -= bet
+                                jackpot += bet
+                        moneyLabel = myFont.render("Money: " + str(money), 1, (255,255,255))
+                        jackpotLabel = myFont.render("Jackpot: " + str(jackpot), 1, (255,255,255))  
+                    if money<bet:
+                        spinLabel = myFont.render("No Money :(", 1, (255,255,255))
                 spinButton.fill((50,50,50))
                 
                 #mouse event for the change bet buttons
@@ -196,7 +199,11 @@ def main():
                     bet = 5
                 elif (mouseWithin(betButton_x[2], betButton_y[2], betButton_width, betButton_height)):
                     bet = 10
-                betLabel = myFont.render("Bet: " + str(bet), 1, (255,255,255))
+                if money >= bet:
+                    betLabel = myFont.render("Bet: " + str(bet), 1, (255,255,255))
+                    spinLabel = myFont.render("Spin!", 1, (255,255,255))
+                else:
+                    spinLabel = myFont.render("No Money :(", 1, (255,255,255))
                 
                 #mouse event for reset button
                 if (mouseWithin(resetButton_x, resetButton_y, resetButton_width, resetButton_height)):
