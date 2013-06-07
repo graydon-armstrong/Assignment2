@@ -10,6 +10,13 @@
 import pygame, random
 pygame.init()
 
+def mouseWithin(mouse_x, mouse_y, obj_x, obj_y, obj_width, obj_height):
+    if (mouse_x >= obj_x and mouse_x <= obj_x+obj_width and 
+        mouse_y >= obj_y and mouse_y <= obj_y+obj_height):
+        return True
+    else:
+        return False
+        
 def main():
     #D - Display configuration
     screen = pygame.display.set_mode((640, 480))
@@ -70,8 +77,7 @@ def main():
                 x_pos = coordinates[0]
                 y_pos = coordinates[1]
                 
-                if (x_pos >= spinButton_x and x_pos <= spinButton_x+spinButton_width and 
-                    y_pos >= spinButton_y and y_pos <= spinButton_y+spinButton_height):
+                if (mouseWithin(x_pos, y_pos, spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     for i in range(num_reels):
                         rand = random.randint(0,4)
                         reel[i].fill(reel_type[rand])
@@ -83,8 +89,7 @@ def main():
                 x_pos = coordinates[0]
                 y_pos = coordinates[1]
                 
-                if (x_pos >= spinButton_x and x_pos <= spinButton_x+spinButton_width and 
-                    y_pos >= spinButton_y and y_pos <= spinButton_y+spinButton_height):
+                if (mouseWithin(x_pos, y_pos, spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
                     spinButton.fill((200,200,200))
                     spinButton_clicked = False
                     
