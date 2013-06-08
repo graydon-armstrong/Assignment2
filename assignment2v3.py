@@ -170,24 +170,33 @@ def main():
             #mouseup events
             elif event.type == pygame.MOUSEBUTTONUP:
                 #mouse event for the spin button
+                #if you have enough money to bet continue
                 if(money>= bet):
+                    #if the spin button is clicked
                     if (mouseWithin(spinButton_x, spinButton_y, spinButton_width, spinButton_height)):
+                        #set all the reels to new images
                         for i in range(num_reels):
                             reelValue[i] = getReelValue()
                             reelSprite[i] = reelImages[reelValue[i]]
                         spinButton_clicked = True
+                        #calculate how much money was won from the sping
                         moneyWon, isJackpot = calculateSpin(reelValue, reelMultipliers, bet)
+                        #if you won the jackpot add the jackpot to the winnings
                         if (isJackpot == True):
                             money += moneyWon + jackpot
                             jackpot = 500
                         else:
+                            #if you didnt win the jackpot add the winnings
                             if (moneyWon > 0):
                                 money += moneyWon
+                            #if you got a blank minus the bet from your money and amake the jackpot bigger
                             else:
                                 money -= bet
                                 jackpot += bet
+                        #refresh the money and jackpot labels
                         moneyLabel = myFont.render("Money: " + str(money), 1, (255,255,255))
                         jackpotLabel = myFont.render("Jackpot: " + str(jackpot), 1, (255,255,255))  
+                    #when you dont have enough money to play with the current bet change the spin button
                     if money<bet:
                         spinLabel = myFont.render("No Money :(", 1, (255,255,255))
                 spinButton.fill((50,50,50))
